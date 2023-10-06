@@ -120,7 +120,7 @@ if selected_button == "Object Detection":
     
         # Process the image for object detection
         image = Image.open(uploaded_image)
-        boxes, pred_cls = get_prediction(image, threshold=0.9) # Get predictions
+        boxes, pred_cls = get_prediction(image, threshold=0.7) # Get predictions
         image_array = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
         image_array = cv2.resize(image_array, (250,200))
         img = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB) # Convert to RGB
