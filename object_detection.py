@@ -122,8 +122,10 @@ if selected_button == "Object Detection":
         image = Image.open(uploaded_image)
         try:
             boxes, pred_cls = get_prediction(image, threshold=0.7) # Get predictions
+            show = 1
         except Exception:
             st.warning("Upload another image to see the magic")
+            show = 0
         image_array = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
         image_array = cv2.resize(image_array, (250,200))
         img = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB) # Convert to RGB
@@ -135,15 +137,16 @@ if selected_button == "Object Detection":
         text_size = 0.5
         text_th = 1
     
-        for box, cls in zip(boxes, pred_cls):#range(len(boxes)):
-            box0=list(box[0])
-            box0=[int(bo) for bo in box0]
-            box1=list(box[1])
-            box1=[int(b1) for b1 in box1]
-            cv2.rectangle(image_array, box0, box1,color=(0, 255, 0), thickness=rect_th) # Draw Rectangle with the coordinates
-            cv2.putText(image_array, cls, box0,  cv2.FONT_HERSHEY_COMPLEX, text_size, (0,255,0),thickness=text_th) # Write the prediction class
-            image_array = cv2.cvtColor(np.array(image_array), cv2.COLOR_RGB2BGR)
-            #print(img)
+        if show == 1:
+            for box, cls in zip(boxes, pred_cls):#range(len(boxes)):
+                box0=list(box[0])
+                box0=[int(bo) for bo in box0]
+                box1=list(box[1])
+                box1=[int(b1) for b1 in box1]
+                cv2.rectangle(image_array, box0, box1,color=(0, 255, 0), thickness=rect_th) # Draw Rectangle with the coordinates
+                cv2.putText(image_array, cls, box0,  cv2.FONT_HERSHEY_COMPLEX, text_size, (0,255,0),thickness=text_th) # Write the prediction class
+                image_array = cv2.cvtColor(np.array(image_array), cv2.COLOR_RGB2BGR)
+                #print(img)
     
         # Display the object-detected 
         with col2:
