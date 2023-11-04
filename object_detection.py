@@ -151,7 +151,7 @@ if selected_button == "Object Detection":
         # Display the object-detected 
         if show == 1:
             with col2:
-                st.markdown("<h2 class='centered-text'>Image with Detected Objects</h2>", unsafe_allow_html=True)
+                st.markdown("<h2 class='centered-text'>Detected Objects</h2>", unsafe_allow_html=True)
                 st.image(image_array, caption="", use_column_width=True)
 
 
