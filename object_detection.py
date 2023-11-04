@@ -120,13 +120,16 @@ if selected_button == "Object Detection":
     
         # Process the image for object detection
         image = Image.open(uploaded_image)
-        boxes, pred_cls = get_prediction(image, threshold=0.7) # Get predictions
+        try:
+            boxes, pred_cls = get_prediction(image, threshold=0.7) # Get predictions
+        except Exceptions:
+            st.warning("Upload another image to see the magic")
         image_array = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
         image_array = cv2.resize(image_array, (250,200))
         img = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB) # Convert to RGB
         with col1:
             st.markdown("<h2 class='centered-text'>Uploaded Image</h2>", unsafe_allow_html=True)
-            st.image(img, caption="Original Image", use_column_width=True)
+            st.image(img, caption=" ", use_column_width=True)
         
         rect_th = 1 
         text_size = 0.5
