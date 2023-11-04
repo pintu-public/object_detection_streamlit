@@ -122,7 +122,7 @@ if selected_button == "Object Detection":
         image = Image.open(uploaded_image)
         try:
             boxes, pred_cls = get_prediction(image, threshold=0.7) # Get predictions
-        except Exceptions:
+        except Exception:
             st.warning("Upload another image to see the magic")
         image_array = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
         image_array = cv2.resize(image_array, (250,200))
